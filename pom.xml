@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>klab-services</artifactId>
+        <groupId>org.integratedmodelling</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>klab.component.raster</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+<!--            <plugin>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <version>3.6.0</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <artifactSet>-->
+<!--                                <excludes>-->
+<!--                                    <exclude>org.integratedmodelling:klab.core.services</exclude>-->
+<!--                                </excludes>-->
+<!--                            </artifactSet>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Plugin-Class>org.integratedmodelling.raster.RasterPlugin</Plugin-Class>
+                            <Plugin-Id>klab.component.raster</Plugin-Id>
+                            <Plugin-Version>1.0-SNAPSHOT</Plugin-Version>
+<!--                            <Plugin-Requires>1.0.0</Plugin-Requires>-->
+<!--                            <Plugin-Dependencies>x, y, z</Plugin-Dependencies>-->
+                            <Plugin-Description>Autonomous observation generation for testing</Plugin-Description>
+                            <Plugin-Provider>Integrated Modelling Partnership</Plugin-Provider>
+                            <Plugin-License>*</Plugin-License>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License (AGPL) version 3.0</name>
+            <url>http://www.gnu.org/licenses/agpl-3.0.en.html</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>Ferdinando Villa</name>
+            <email>ferdinando.villa@bc3research.org</email>
+            <organization>Basque Centre for Climate Change (BC3); IKERBASQUE, Basque foundation for science
+            </organization>
+            <organizationUrl>http://www.bc3research.org</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:http://github.com/integratedmodelling/klab.component.raster</connection>
+        <developerConnection>scm:git:https://github.com/integratedmodelling/klab.component.raster</developerConnection>
+        <url>https://github.com/integratedmodelling/klab.component.raster.git</url>
+    </scm>
+
+    <organization>
+        <name>integratedmodelling.org</name>
+        <url>http://www.integratedmodelling.org</url>
+    </organization>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.integratedmodelling</groupId>
+            <artifactId>klab.core.services</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>
