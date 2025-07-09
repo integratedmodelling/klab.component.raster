@@ -1,4 +1,4 @@
-package org.integratedmodelling.raster.adapters;
+package org.integratedmodelling.geospatial.adapters;
 
 import org.integratedmodelling.klab.api.knowledge.Artifact;
 import org.integratedmodelling.klab.api.knowledge.KlabAsset;

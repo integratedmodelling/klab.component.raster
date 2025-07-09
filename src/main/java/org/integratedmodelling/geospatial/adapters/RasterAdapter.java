@@ -1,4 +1,4 @@
-package org.integratedmodelling.raster.adapters;
+package org.integratedmodelling.geospatial.adapters;
 
 import org.integratedmodelling.klab.api.data.Data;
 import org.integratedmodelling.klab.api.data.Version;
@@ -6,7 +6,6 @@ import org.integratedmodelling.klab.api.geometry.Geometry;
 import org.integratedmodelling.klab.api.knowledge.Observable;
 import org.integratedmodelling.klab.api.knowledge.Urn;
 import org.integratedmodelling.klab.api.scope.Scope;
-import org.integratedmodelling.klab.api.services.resources.adapters.Importer;
 import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdapter;
 import org.integratedmodelling.klab.api.services.runtime.Notification;
 import org.integratedmodelling.klab.configuration.ServiceConfiguration;

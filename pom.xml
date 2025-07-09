@@ -41,7 +41,7 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Plugin-Class>org.integratedmodelling.raster.RasterPlugin</Plugin-Class>
+                            <Plugin-Class>org.integratedmodelling.geospatial.RasterPlugin</Plugin-Class>
                             <Plugin-Id>klab.component.raster</Plugin-Id>
                             <Plugin-Version>1.0-SNAPSHOT</Plugin-Version>
 <!--                            <Plugin-Requires>1.0.0</Plugin-Requires>-->

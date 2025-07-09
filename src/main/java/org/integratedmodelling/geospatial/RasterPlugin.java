@@ -1,4 +1,4 @@
-package org.integratedmodelling.raster;
+package org.integratedmodelling.geospatial;
 
 import org.integratedmodelling.klab.extension.KlabComponent;
 import org.pf4j.PluginWrapper;
