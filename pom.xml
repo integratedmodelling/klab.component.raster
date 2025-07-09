@@ -8,7 +8,7 @@
         <groupId>org.integratedmodelling</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>klab.component.raster</artifactId>
+    <artifactId>klab.component.geospatial</artifactId>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -32,6 +32,24 @@
 <!--                </executions>-->
 <!--            </plugin>-->
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>write-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>
+                                ${project.basedir}/klab.component.geospatial.properties
+                            </outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -41,8 +59,8 @@
                             <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                         </manifest>
                         <manifestEntries>
-                            <Plugin-Class>org.integratedmodelling.geospatial.RasterPlugin</Plugin-Class>
-                            <Plugin-Id>klab.component.raster</Plugin-Id>
+                            <Plugin-Class>org.integratedmodelling.geospatial.GeospatialPlugin</Plugin-Class>
+                            <Plugin-Id>klab.component.geospatial</Plugin-Id>
                             <Plugin-Version>1.0-SNAPSHOT</Plugin-Version>
 <!--                            <Plugin-Requires>1.0.0</Plugin-Requires>-->
 <!--                            <Plugin-Dependencies>x, y, z</Plugin-Dependencies>-->
@@ -59,6 +77,11 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <plugin.id>${artifactId}</plugin.id>
+        <plugin.class>org.integratedmodelling.geospatial.GeospatialPlugin</plugin.class>
+        <plugin.version>${version}</plugin.version>
+        <plugin.provider>klab</plugin.provider>
+        <plugin.dependencies/>
     </properties>
 
 

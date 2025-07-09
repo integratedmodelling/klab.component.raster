@@ -34,7 +34,7 @@
   </build>
   <properties>
     <maven.compiler.source>21</maven.compiler.source>
-    <plugin.class>org.integratedmodelling.geospatial.RasterPlugin</plugin.class>
+    <plugin.class>org.integratedmodelling.geospatial.GeospatialPlugin</plugin.class>
     <plugin.version>${klab.version}</plugin.version>
     <plugin.id>observation-raster-plugin</plugin.id>
     <maven.compiler.target>21</maven.compiler.target>
