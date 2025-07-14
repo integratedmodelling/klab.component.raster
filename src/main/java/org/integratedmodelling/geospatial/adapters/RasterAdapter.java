@@ -10,7 +10,7 @@ import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdap
 import org.integratedmodelling.klab.api.services.runtime.Notification;
 import org.integratedmodelling.klab.configuration.ServiceConfiguration;
 
-@ResourceAdapter(name = "raster", universal = true, version = Version.CURRENT)
+@ResourceAdapter(name = "raster", version = Version.CURRENT)
 public class RasterAdapter {
 
     @ResourceAdapter.Encoder
