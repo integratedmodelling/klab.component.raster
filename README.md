@@ -46,6 +46,9 @@ This project is licensed under the GNU Affero General Public License (AGPL) vers
 - **Ferdinando Villa** - Lead Developer
     - Email: ferdinando.villa@bc3research.org
     - Organization: Basque Centre for Climate Change (BC3); IKERBASQUE
+- **Iñigo Cobian** - Lead Developer
+  - Email: inigo.cobian@bc3research.org
+  - Organization: Basque Centre for Climate Change (BC3)
 
 ## Organization
 
