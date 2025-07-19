@@ -13,9 +13,10 @@ import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdap
 /**
  * Handles "klab:random:...." URNs. Produces various types of random data, objects, or events. The
  * namespace (third field of the URN) selects the type of object:
+ *
  * @author Ferd
  */
-@ResourceAdapter(name = "wcs", version = Version.CURRENT)
+@ResourceAdapter(name = "wcs", version = Version.CURRENT, type = Artifact.Type.NUMBER)
 public class WCSAdapter {
 
   public WCSAdapter() {}

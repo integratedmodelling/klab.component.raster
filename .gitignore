@@ -28,3 +28,4 @@ replay_pid*
 
 # builds
 target
+/klab.component.geospatial.properties

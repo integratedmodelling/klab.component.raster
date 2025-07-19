@@ -6,6 +6,7 @@ import org.integratedmodelling.klab.api.exceptions.KlabUnimplementedException;
 import org.integratedmodelling.klab.api.geometry.Geometry;
 import org.integratedmodelling.klab.api.knowledge.Artifact;
 import org.integratedmodelling.klab.api.knowledge.Observable;
+import org.integratedmodelling.klab.api.knowledge.Resource;
 import org.integratedmodelling.klab.api.knowledge.Urn;
 import org.integratedmodelling.klab.api.scope.Scope;
 import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdapter;
@@ -30,7 +31,7 @@ public class WFSAdapter {
    * @return
    */
   @ResourceAdapter.Type
-  public Artifact.Type getType(Urn resourceUrn) {
+  public Artifact.Type getType(Resource resourceUrn) {
     throw new KlabUnimplementedException("random adapter: can't handle URN " + resourceUrn);
   }
 }
