@@ -13,46 +13,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>write-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <outputFile>
-                                ${project.basedir}/klab.component.geospatial.properties
-                            </outputFile>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.apache.maven.plugins</groupId>-->
-<!--                <artifactId>maven-jar-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <archive>-->
-<!--                        <manifest>-->
-<!--                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>-->
-<!--                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>-->
-<!--                        </manifest>-->
-<!--                        <manifestEntries>-->
-<!--                            <Plugin-Class>org.integratedmodelling.geospatial.GeospatialPlugin</Plugin-Class>-->
-<!--                            <Plugin-Id>klab.component.geospatial</Plugin-Id>-->
-<!--                            <Plugin-Version>1.0-SNAPSHOT</Plugin-Version>-->
-<!--                            &lt;!&ndash;                            <Plugin-Requires>1.0.0</Plugin-Requires>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            <Plugin-Dependencies>x, y, z</Plugin-Dependencies>&ndash;&gt;-->
-<!--                            <Plugin-Description>Autonomous observation generation for testing</Plugin-Description>-->
-<!--                            <Plugin-Provider>Integrated Modelling Partnership</Plugin-Provider>-->
-<!--                            <Plugin-License>*</Plugin-License>-->
-<!--                        </manifestEntries>-->
-<!--                    </archive>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
-            <plugin>
                 <groupId>org.integratedmodelling</groupId>
                 <artifactId>klab.product</artifactId>
                 <version>1.0.1-SNAPSHOT</version>
@@ -62,7 +22,6 @@
                             <goal>package-component</goal>
                         </goals>
                         <configuration>
-                            <outputJar>${project.build.directory}/${project.artifactId}-${project.version}.kar</outputJar>
                             <componentName>klab.component.geospatial</componentName>
                             <componentDescription>2D Geospatial adapters and algorithms for k.LAB</componentDescription>
                             <componentVendorName>Integrated Modelling Partnership</componentVendorName>
@@ -120,11 +79,11 @@
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://central.sonatype.com/repository/maven-snapshots/</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
 
