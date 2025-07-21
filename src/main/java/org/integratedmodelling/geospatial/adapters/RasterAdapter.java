@@ -1,7 +1,14 @@
 package org.integratedmodelling.geospatial.adapters;
 
+import org.geotools.coverage.grid.GridCoverage2D;
+import org.geotools.coverage.grid.GridGeometry2D;
+import org.geotools.coverage.grid.io.AbstractGridCoverage2DReader;
+import org.geotools.coverage.grid.io.AbstractGridFormat;
+import org.geotools.coverage.grid.io.GridFormatFinder;
+import org.integratedmodelling.klab.api.collections.Parameters;
 import org.integratedmodelling.klab.api.data.Data;
 import org.integratedmodelling.klab.api.data.Version;
+import org.integratedmodelling.klab.api.exceptions.KlabIOException;
 import org.integratedmodelling.klab.api.geometry.Geometry;
 import org.integratedmodelling.klab.api.knowledge.Artifact;
 import org.integratedmodelling.klab.api.knowledge.KlabAsset;
@@ -11,9 +18,17 @@ import org.integratedmodelling.klab.api.scope.Scope;
 import org.integratedmodelling.klab.api.services.resources.adapters.Importer;
 import org.integratedmodelling.klab.api.services.resources.adapters.Parameter;
 import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdapter;
+import org.integratedmodelling.klab.api.services.resources.impl.ResourceBuilderImpl;
 import org.integratedmodelling.klab.api.services.runtime.Notification;
-import org.integratedmodelling.klab.api.services.runtime.extension.KlabFunction;
 import org.integratedmodelling.klab.configuration.ServiceConfiguration;
+import org.opengis.geometry.Envelope;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import static org.apache.commons.io.IOUtils.copy;
 
 @ResourceAdapter(
     name = "raster",
@@ -21,7 +36,7 @@ import org.integratedmodelling.klab.configuration.ServiceConfiguration;
     type = Artifact.Type.NUMBER,
     parameters = {
       // TODO
-      @Parameter(name = "noData", type = Artifact.Type.NUMBER, description = "No data value")
+      @Parameter(name = "noData", type = Artifact.Type.NUMBER)//, description = "No data value")
     })
 public class RasterAdapter {
 
@@ -67,6 +82,58 @@ public class RasterAdapter {
       mediaType = "image/tiff;application=geotiff",
       fileExtensions = {"tiff"})
   public static String importGeotiff() {
+    //ResourceBuilderImpl builder = validateLocalImport();
     return null;
+  }
+
+  @ResourceAdapter.Validator(
+      phase = ResourceAdapter.Validator.LifecyclePhase.LocalImport,
+      metadataConventions = ""
+  )
+  public static ResourceBuilderImpl validateLocalImport(String urn, URL url, Parameters<String> userData) throws IOException {
+    ResourceBuilderImpl ret = new ResourceBuilderImpl(urn);
+    ret.withParameters(userData);
+
+    File file = getFileForURL(url);
+    ret.addImportedFile(file);
+
+    ret.withAdapterType("raster");
+
+
+    AbstractGridFormat format = GridFormatFinder.findFormat(file);
+    AbstractGridCoverage2DReader reader = format.getReader(file);
+    GridCoverage2D coverage = reader.read(null);
+    Envelope envelope = coverage.getEnvelope();
+    CoordinateReferenceSystem crs = coverage.getCoordinateReferenceSystem();
+    GridGeometry2D grid = coverage.getGridGeometry();
+    coverage.getGridGeometry().getEnvelope();
+
+    // TODO set geometry
+    Geometry geometry = null;
+    ret.withGeometry(geometry);
+    return ret;
+  }
+
+  // Utils
+  /**
+   * Gets the file for URL.
+   *
+   * @param url the url
+   * @return the file for URL
+   * @throws KlabIOException the klab IO exception
+   */
+  public static File getFileForURL(URL url) throws KlabIOException, IOException {
+    if (url.toString().startsWith("file:")) {
+      return new File(url.getFile());
+    } else {
+      File temp;
+      try {
+        temp = File.createTempFile("url", "url");
+      } catch (IOException e) {
+        throw new KlabIOException(e);
+      }
+      copy(url, temp);
+      return temp;
+    }
   }
 }
