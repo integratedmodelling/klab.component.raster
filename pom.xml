@@ -66,9 +66,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:http://github.com/integratedmodelling/klab.component.raster</connection>
-        <developerConnection>scm:git:https://github.com/integratedmodelling/klab.component.raster</developerConnection>
-        <url>https://github.com/integratedmodelling/klab.component.raster.git</url>
+        <connection>scm:git:http://github.com/integratedmodelling/klab.component.geospatial</connection>
+        <developerConnection>scm:git:https://github.com/integratedmodelling/klab.component.geospatial</developerConnection>
+        <url>https://github.com/integratedmodelling/klab.component.geospatial.git</url>
     </scm>
 
     <organization>
