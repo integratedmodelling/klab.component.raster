@@ -31,6 +31,7 @@ public class RasterAdapter {
     builder.notification(Notification.debug("Encoding a raster."));
     readRaster(urn, builder, geometry, observable, scope);
     // TODO
+    
   }
 
   private void readRaster(
