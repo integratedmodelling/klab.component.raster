@@ -1,5 +1,6 @@
 package org.integratedmodelling.geospatial.adapters;
 
+import com.google.common.collect.Sets;
 import org.integratedmodelling.klab.api.data.Data;
 import org.integratedmodelling.klab.api.data.Version;
 import org.integratedmodelling.klab.api.geometry.Geometry;
@@ -15,6 +16,9 @@ import org.integratedmodelling.klab.api.services.runtime.Notification;
 import org.integratedmodelling.klab.api.services.runtime.extension.KlabFunction;
 import org.integratedmodelling.klab.configuration.ServiceConfiguration;
 
+import java.awt.image.Raster;
+import java.util.Set;
+
 /**
  * File-based rasters, not embeddable. The implementation should enable promotion to STAC or WCS on
  * publication to shared services, so that it can become embeddable.
@@ -25,9 +29,35 @@ import org.integratedmodelling.klab.configuration.ServiceConfiguration;
     type = Artifact.Type.NUMBER,
     parameters = {
       // TODO
-      @Parameter(name = "noData", type = Artifact.Type.NUMBER, description = "No data value")
+      @Parameter(
+          name = RasterAdapter.NODATA_PARAM,
+          type = Artifact.Type.NUMBER,
+          description = "No data value")
     })
 public class RasterAdapter {
+
+  public static final String NODATA_PARAM = "noData";
+  public static final String BAND_PARAM = "band";
+  public static final String INTERPOLATION_PARAM = "interpolation";
+
+  /** All recognized primary file extensions. */
+  public static Set<String> fileExtensions = Set.of("tif", "tiff");
+
+  /** All recognized secondary file extensions */
+  public static Set<String> secondaryFileExtensions =
+      Set.of("tfw", "prj", "tif.ovr", "tif.aux.xml", "txt", "pdf");
+
+  /** All the permitted band mixing operations. */
+  public static Set<String> bandMixingOperations =
+      Set.of("max_value", "min_value", "avg_value", "max_band", "min_band");
+
+  /** Interpolation type for metadata */
+  public static final String INTERPOLATION_TYPE_FIELD = "interpolation";
+
+  /** Possible values of interpolation type (JAI classes) */
+  public static final String[] INTERPOLATION_TYPE_VALUES = {
+    "bilinear", "nearest", "bicubic", "bicubic2"
+  };
 
   @ResourceAdapter.Encoder
   public void encode(
