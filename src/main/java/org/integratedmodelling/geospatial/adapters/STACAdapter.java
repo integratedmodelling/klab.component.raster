@@ -12,9 +12,11 @@ import org.integratedmodelling.klab.api.scope.Scope;
 import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdapter;
 
 /**
+ * STAC is service-bound so it can be embedded in a runtime.
+ *
  * @author Ferd
  */
-@ResourceAdapter(name = "stac", version = Version.CURRENT)
+@ResourceAdapter(name = "stac", version = Version.CURRENT, embeddable = true)
 public class STACAdapter {
 
   public STACAdapter() {}
@@ -24,8 +26,8 @@ public class STACAdapter {
       Urn urn, Data.Builder builder, Geometry geometry, Observable observable, Scope scope) {}
 
   /**
-   * If there's no type param in the resource adapter annotation. This may take a URN and/or a full
-   * Resource according to what is needed to establish the type.
+   * STAC may provide all sorts of things, so the decision needs to look at the entire resource
+   * parameterization.
    *
    * @param resourceUrn
    * @return

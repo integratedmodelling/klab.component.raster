@@ -15,6 +15,10 @@ import org.integratedmodelling.klab.api.services.runtime.Notification;
 import org.integratedmodelling.klab.api.services.runtime.extension.KlabFunction;
 import org.integratedmodelling.klab.configuration.ServiceConfiguration;
 
+/**
+ * File-based rasters, not embeddable. The implementation should enable promotion to STAC or WCS on
+ * publication to shared services, so that it can become embeddable.
+ */
 @ResourceAdapter(
     name = "raster",
     version = Version.CURRENT,
@@ -31,7 +35,7 @@ public class RasterAdapter {
     builder.notification(Notification.debug("Encoding a raster."));
     readRaster(urn, builder, geometry, observable, scope);
     // TODO
-    
+
   }
 
   private void readRaster(

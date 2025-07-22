@@ -12,9 +12,15 @@ import org.integratedmodelling.klab.api.scope.Scope;
 import org.integratedmodelling.klab.api.services.resources.adapters.ResourceAdapter;
 
 /**
+ * WFS is service-bound so it's embeddable.
+ *
  * @author Ferd
  */
-@ResourceAdapter(name = "wfs", version = Version.CURRENT)
+@ResourceAdapter(
+    name = "wfs",
+    type = Artifact.Type.OBJECT,
+    version = Version.CURRENT,
+    embeddable = true)
 public class WFSAdapter {
 
   public WFSAdapter() {}
