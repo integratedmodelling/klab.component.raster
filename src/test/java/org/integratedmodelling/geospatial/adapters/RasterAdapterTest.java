@@ -8,36 +8,18 @@ import org.pf4j.DefaultPluginManager;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static org.integratedmodelling.geospatial.adapters.RasterAdapter.importGeotiff;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class RasterAdapterTest {
 
     @Test
-    void none() {
+    void none() throws IOException {
         assertFalse(false);
     }
 
-    @Test
-    @Disabled
-    void importBaseTest() {
-        PluginManager pluginManager = new DefaultPluginManager(Paths.get("plugins"));
-        // 2. Load Plugins
-        pluginManager.loadPlugins();
-
-        // 3. Start Plugins
-        pluginManager.startPlugins();
-
-        // 4. Verify Plugin States
-        List<PluginWrapper> startedPlugins = pluginManager.getStartedPlugins();
-        assertFalse(startedPlugins.isEmpty(), "No plugins were started.");
-    }
-
-    @Test
-    @Disabled
-    void encoderBaseTest() {
-        Assertions.assertTrue(true);
-    }
 }
