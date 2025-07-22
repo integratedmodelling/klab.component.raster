@@ -57,8 +57,8 @@ import org.opengis.coverage.grid.GridCoverage;
 import org.opengis.referencing.crs.CoordinateReferenceSystem;
 
 /**
- * The {@code RasterEncoder} adapts a raster resource (file-based) to a passed geometry and returns
- * the correspondent IKlabData.
+ * The {@code RasterEncoder} adapts a raster resource (file-based) to a passed geometry and builds
+ * the correspondent Data buffer.
  */
 public class RasterEncoder {
 
@@ -106,6 +106,7 @@ public class RasterEncoder {
     }
 
     String bandMixer = null;
+    // TODO use an enum here
     if (resource.getParameters().contains("bandmixer")) {
       bandMixer = resource.getParameters().get("bandmixer", String.class);
       //      if (!RasterAdapter.bandMixingOperations.contains(bandMixer)) {
@@ -114,18 +115,9 @@ public class RasterEncoder {
       //      }
     }
 
-
-//    var range = call.getParameters().get("range", NumericRange.create(0., 4000., false, false));
     var xy = scale.getSpace().getShape();
     var xx = xy.get(0);
     var yy = xy.get(1);
-//    var terrain =
-//            new Terrain(
-//                    call.getParameters().get("detail", 8),
-//                    call.getParameters().get("roughness", 0.55),
-//                    range.getLowerBound(),
-//                    range.getUpperBound());
-//
     long offset = 0;
     var filler = builder.buffer(Storage.DoubleBuffer.class, Data.SpaceFillingCurve.D2_XY);
     for (Geometry subscale : scale.without(Geometry.Dimension.Type.SPACE)) {
@@ -133,40 +125,39 @@ public class RasterEncoder {
       for (int x = 0; x < xx; x++) {
         for (int y = 0; y < yy; y++) {
 
-      double value =
+          double value =
               bandMixer == null
-              ? getCellValue(iterator, x, y, band)
-              : getCellMixerValue(iterator, x, y, bandMixer, nBands);
+                  ? getCellValue(iterator, x, y, band)
+                  : getCellMixerValue(iterator, x, y, bandMixer, nBands);
 
-      // this is cheeky but will catch most of the nodata and
-      // none of the good data
-      // FIXME see if this is really necessary
-      if (value < -1.0E35 || value > 1.0E35) {
-        value = Double.NaN;
-      }
+          // this is cheeky but will catch most of the nodata and
+          // none of the good data
+          // FIXME see if this is really necessary
+          if (value < -1.0E35 || value > 1.0E35) {
+            value = Double.NaN;
+          }
 
-      for (double nd : nodata) {
-        if (Utils.Numbers.equal(value, nd)) {
-          value = Double.NaN;
-          break;
-        }
-      }
+          for (double nd : nodata) {
+            if (Utils.Numbers.equal(value, nd)) {
+              value = Double.NaN;
+              break;
+            }
+          }
 
-      if (transformation != null && Utils.Data.isData(value)) {
-        binding.setVariable("self", value);
-        Object o = transformation.run();
-        if (o instanceof Number) {
-          value = ((Number) o).doubleValue();
-        } else {
-          value = Double.NaN;
-        }
-      }
+          if (transformation != null && Utils.Data.isData(value)) {
+            binding.setVariable("self", value);
+            Object o = transformation.run();
+            if (o instanceof Number) {
+              value = ((Number) o).doubleValue();
+            } else {
+              value = Double.NaN;
+            }
+          }
 
-      filler.set(value, offset++);
+          filler.set(value, offset++);
         }
       }
     }
-
   }
 
   private double getCellValue(RandomIter iterator, long x, long y, int band) {
@@ -188,7 +179,7 @@ public class RasterEncoder {
       return getMinCellValue(iterator, x, y, nBands);
     }
     if (mixingOperation.equals("avg_value")) {
-      return getAvgCellValue(iterator, x,y, nBands);
+      return getAvgCellValue(iterator, x, y, nBands);
     }
     if (mixingOperation.equals("sum_value")) {
       return getSumCellValue(iterator, x, y, nBands);
