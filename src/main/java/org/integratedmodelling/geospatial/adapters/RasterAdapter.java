@@ -99,7 +99,7 @@ public class RasterAdapter {
       knowledgeClass = KlabAsset.KnowledgeClass.RESOURCE,
       description = "Imports a raster resource",
       mediaType = "image/tiff;application=geotiff",
-      fileExtensions = {"tiff"})
+      fileExtensions = {"tif", "tiff"})
   public static String importGeotiff() {
     return null;
   }
