@@ -359,8 +359,7 @@ public class RasterEncoder {
   private GridCoverage getOriginalCoverage(Resource resource) {
 
     File mainFile = null;
-    for (var path : resource.getLocalPaths()) {
-      File file = new File(path);
+    for (var file : resource.getLocalFiles()) {
       if (RasterAdapter.fileExtensions.contains(Utils.Files.getFileExtension(file))) {
         if (file.exists() && file.canRead()) {
           mainFile = file;
